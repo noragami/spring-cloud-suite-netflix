@@ -1,0 +1,36 @@
+info:
+  component: Edge Server
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  prefix: /api
+  routes:
+    employee:
+      path: /employee/**
+      serviceId: employee-service
+    organization:
+      path: /organization/**
+      serviceId: organization-service
+    department:
+      path: /department/**
+      serviceId: department-service
+
+ribbon:
+  eureka:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+    registerWithEureka: false
+
+server:
+  port: 8060
